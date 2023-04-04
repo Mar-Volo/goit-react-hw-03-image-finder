@@ -1,16 +1,25 @@
-export const App = () => {
-  return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
-  );
+import { Component } from 'react';
+import { SearchBar } from './SearchBar/SearchBar';
+import FetchImages from './FetchAPI/FetchImages';
+import { Layout } from './Layout/Layout';
+import { GlobalStyle } from './GlobalStyle';
+
+
+let page = 1;
+
+export class App extends Component {
+  state = {
+    searchQery: '',
+
+  }
+
+  
+   render () {
+     return (
+       <Layout>
+         <SearchBar/>
+         <GlobalStyle/>
+       </Layout>
+     );
+  }
 };
