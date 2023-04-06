@@ -3,7 +3,7 @@ import axios from 'axios';
 export default async function FetchImages(value, page) {
   const url = 'https://pixabay.com/api/';
   const key = '35043953-23d752bfe4dffcea57d0f9bb5';
-  const fetch = `${url}${key}&q=${value}$page=1&image_type=photo&orientation=horizontal&safesearch=true&per_page=${page}`;
+  const fetch = `${url}?key=${key}&q=${value}&image_type=photo&orientation=horizontal&safesearch=true&per_page=12&page=${page}`;
   return await axios.get(fetch).then(response => response.data);
 }
 

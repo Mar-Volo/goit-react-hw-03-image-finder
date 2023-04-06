@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
+import { ImSearch } from 'react-icons/im';
 import { Header } from './SearchBar.styled';
 import { SearchContainer } from './SearchBar.styled';
 import { SearchForm } from './SearchBar.styled';
@@ -14,7 +15,7 @@ export class SearchBar extends Component {
 
   handleSubmit = e => {
     const { searchQuery } = this.state;
-    e.prevantDefault();
+    e.preventDefault();
     this.props.submitForm(searchQuery);
     this.setState({ searchQuery: '' });
   };
@@ -31,7 +32,9 @@ export class SearchBar extends Component {
         <Container>
           <SearchContainer>
             <SearchForm onSubmit={this.handleSubmit}>
-              <SearchButton type="submit"></SearchButton>
+              <SearchButton type="submit">
+                <ImSearch size={20} />
+              </SearchButton>
               <SearchInput
                 type="text"
                 autoComplete="off"
