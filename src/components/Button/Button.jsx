@@ -15,3 +15,4 @@ export const LoadBtn = ({ onClick }) => {
 LoadBtn.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
+///////////////
