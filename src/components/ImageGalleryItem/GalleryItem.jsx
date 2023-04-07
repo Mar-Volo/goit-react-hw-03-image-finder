@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
-
+import { Modal } from '../Modal/Modal';
 import { Component } from 'react';
-
 import { Item, Img } from './GalleryItem.styled';
 
 export class ListItem extends Component {
@@ -9,12 +8,28 @@ export class ListItem extends Component {
     isVisible: false,
   };
 
+  // toggleModal = () => {
+  //   this.setState(({ isVisible }) => ({
+  //     isVisible: !isVisible,
+  //   }));
+  // };
+
+  toggleModal = () => {
+    this.setState(prevState => ({ isVisible: !prevState.isVisible }));
+  };
+
   render() {
+    const { isVisible } = this.state;
     const { item } = this.props;
-    const { webformatURL, tags } = item;
+    const { webformatURL, tags, largeImageURL } = item;
     return (
       <Item>
-        <Img src={webformatURL} alt={tags} />
+        <Img onClick={this.toggleModal} src={webformatURL} alt={tags} />
+        {isVisible && (
+          <Modal handleClose={this.toggleModal}>
+            <img src={largeImageURL} alt={tags} />
+          </Modal>
+        )}
       </Item>
     );
   }

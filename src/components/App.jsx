@@ -26,7 +26,7 @@ export class App extends Component {
     if (searchQuery.trim() === '') {
       toast('Enter some request', {
         position: 'top-right',
-        autoClose: 2500,
+        autoClose: 1500,
         theme: 'dark',
       });
     } else {
@@ -37,7 +37,7 @@ export class App extends Component {
           this.setState({ status: 'idle' });
           toast('No images for your request', {
             position: 'top-right',
-            autoClose: 2500,
+            autoClose: 1500,
             theme: 'dark',
           });
         } else {
@@ -48,8 +48,6 @@ export class App extends Component {
             status: 'resolved',
           });
         }
-        console.log(await FetchImages(searchQuery, page));
-        console.log(totalHits, hits);
       } catch (error) {
         this.setState({ status: 'rejected' });
         console.log(error.message);
@@ -61,20 +59,19 @@ export class App extends Component {
     const { searchQuery } = this.state;
     this.setState({ status: 'pending' });
     try {
-      const { hits } = await FetchImages(searchQuery, (page+=1));
+      const { hits } = await FetchImages(searchQuery, (page += 1));
       this.setState(prevState => ({
         hits: [...prevState.hits, ...hits],
         status: 'resolved',
       }));
     } catch (err) {
-      this.setState({ status: 'rejected' })
+      this.setState({ status: 'rejected' });
       console.log(err.message);
     }
   };
 
   render() {
     const { totalHits, hits, status } = this.state;
-    console.log(this.state);
     if (status === 'idle') {
       return (
         <Layout>
@@ -115,8 +112,8 @@ export class App extends Component {
           <SearchBar submitForm={this.handleSubmit} />
           <main>
             <Container style={{ paddingRight: '34px' }}>
-              <GalleryList  items={hits} />
-              {totalHits > 12 && <LoadBtn onClick={this.handleLoad}/>}
+              <GalleryList items={hits} />
+              {totalHits > 12 && <LoadBtn onClick={this.handleLoad} />}
             </Container>
           </main>
           <GlobalStyle />
@@ -134,7 +131,7 @@ export class App extends Component {
             <Container style={{ paddingRight: '34px' }} />
             {toast('Something went wrong', {
               position: 'top-right',
-              autoClose: 2500,
+              autoClose: 1500,
               theme: 'dark',
             })}
             ;
@@ -149,4 +146,3 @@ export class App extends Component {
     }
   }
 }
-
