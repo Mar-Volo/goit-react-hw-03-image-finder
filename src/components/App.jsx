@@ -29,6 +29,7 @@ export class App extends Component {
         autoClose: 1500,
         theme: 'dark',
       });
+      // this.setState({ status: 'idle', hits: [], totalHits: 0 }); в зависимости от концепции приложения.
     } else {
       try {
         this.setState({ status: 'pending' });
@@ -113,7 +114,7 @@ export class App extends Component {
           <main>
             <Container style={{ paddingRight: '34px' }}>
               <GalleryList items={hits} />
-              {totalHits > 12 && <LoadBtn onClick={this.handleLoad} />}
+              {hits.length < totalHits && <LoadBtn onClick={this.handleLoad} />}
             </Container>
           </main>
           <GlobalStyle />
